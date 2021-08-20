@@ -3,7 +3,6 @@ var Connection = /** @class */ (function () {
         this.id = 1;
     }
     Connection.getInstance = function () {
-        //console.log('getInstance');
         if (!Connection.instance) {
             Connection.instance = new Connection();
         }

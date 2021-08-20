@@ -1,19 +1,19 @@
 
 class Connection {
+	private static instance: Connection;
 
 	public static getInstance(): Connection {
-		//console.log('getInstance');
 		if (!Connection.instance) {
 			Connection.instance = new Connection();
 		}
 		return Connection.instance;
 	}
-	private static instance: Connection;
+
 	private id: number;
+
 	private constructor() {
 		this.id = 1;
 	}
-
 
 
 	getId(): number {
@@ -24,7 +24,6 @@ class Connection {
 		if (id > 0) {
 			this.id = id;
 		}
-
 	}
 }
 
