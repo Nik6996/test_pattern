@@ -1,8 +1,7 @@
-let forTest: string = 'test111';
-console.log(forTest)
+let forTest: string = 'test1115';
 
 function test() {
 	return forTest;
 }
 
-test()
+console.log(test());

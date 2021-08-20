@@ -1,3 +1,6 @@
-var forTest = 'test111';
-console.log(forTest);
+var forTest = 'test1115';
+function test() {
+    return forTest;
+}
+console.log(test());
 //# sourceMappingURL=oop_test.js.map
