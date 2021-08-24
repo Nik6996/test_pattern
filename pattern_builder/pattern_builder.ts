@@ -1,28 +1,49 @@
 
+interface IBuilderCar {
+	wheels(wheels: number): void
+	engine(engineNew: string): void
+	autoPilot(autoPilotNew: boolean): void
+}
 
-// interface IbuilderCar {
-// 	setColor(): void;
-// 	setPrice(): void;
-// 	setAudioSystem(): void;
-// }
+class Car1 {
+	constructor(
+		public wheels: number = 4,
+		public engine: string = 'V8',
+		public autoPilot: boolean = false
+	) { }
 
+}
 
-// class CarBuilder implements IbuilderCar {
+class BuilderCar implements IBuilderCar {
+	public car: Car1
+	constructor() {
+		this.car = new Car1();
+	}
 
-// 	setColor(color: string): string {
-// 		return color
-// 	}
-// 	setPrice(price: number): number {
-// 		return price
-// 	}
-// 	setAudioSystem(audioSystem: boolean): boolean {
-// 		return audioSystem
-// 	}
+	public wheels(wheelNew: number): number {
+		return this.car.wheels = wheelNew
+	}
+	public engine(engineNew: string): string {
 
-// 	builder() {
-// 		return this.car
-// 	}
-// }
+		return this.car.engine = engineNew
+	}
+	public autoPilot(autoPilotNew: boolean): boolean {
+		return this.car.autoPilot = autoPilotNew
+	}
+
+	builder() {
+		return this.car
+	}
+}
+
+let testBuilder = new BuilderCar()
+testBuilder.wheels(8);
+testBuilder.engine('V8 Turbo');
+testBuilder.autoPilot(true);
+testBuilder.builder();
+
+console.log(testBuilder.builder().autoPilot)
+
 
 
 
