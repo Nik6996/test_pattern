@@ -14,7 +14,7 @@ class BmwCar implements TopCar {
 }
 
 
-class CarFactory {
+class SimpleCarFactory {
 	create(type: string): TopCar {
 		if (type === 'X3')
 			return new BmwCar(type, 5000, 200);
@@ -23,13 +23,13 @@ class CarFactory {
 	}
 }
 
-const newBmw = new CarFactory();
+const newBmw = new SimpleCarFactory();
 let x5 = newBmw.create('X5');
-console.log(x5);
+console.log(x5.price);
 
-const newBmw1 = new CarFactory();
+
 let x3 = newBmw.create('X3');
-console.log(x3);
+console.log(x3.model);
 
 
 

@@ -15,14 +15,15 @@ class Connection {
 		this.id = 1;
 	}
 
-
 	getId(): number {
 		return this.id
 	}
 
 	setId(id: number): void {
-		if (id > 0) {
+		if (id > 5) {
 			this.id = id;
+		} else {
+			this.id = 5;
 		}
 	}
 }
@@ -34,7 +35,7 @@ connection.setId(2);
 console.log(connection.getId())
 
 let connection2 = Connection.getInstance()
-connection2.setId(3);
+connection2.setId(7);
 console.log(connection2.getId())
 
 

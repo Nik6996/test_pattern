@@ -12,8 +12,11 @@ var Connection = /** @class */ (function () {
         return this.id;
     };
     Connection.prototype.setId = function (id) {
-        if (id > 0) {
+        if (id > 5) {
             this.id = id;
+        }
+        else {
+            this.id = 5;
         }
     };
     return Connection;
@@ -22,6 +25,6 @@ var connection = Connection.getInstance();
 connection.setId(2);
 console.log(connection.getId());
 var connection2 = Connection.getInstance();
-connection2.setId(3);
+connection2.setId(7);
 console.log(connection2.getId());
 //# sourceMappingURL=pattern_singleton.js.map
