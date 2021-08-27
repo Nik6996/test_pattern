@@ -25,7 +25,7 @@ class SimpleCarFactory {
 
 const newBmw = new SimpleCarFactory();
 let x5 = newBmw.create('X5');
-console.log(x5.price);
+console.log(x5);
 
 
 let x3 = newBmw.create('X3');

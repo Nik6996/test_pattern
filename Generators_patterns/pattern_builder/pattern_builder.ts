@@ -24,7 +24,6 @@ class BuilderCar implements IBuilderCar {
 		this.autoPilot = autoPilot;
 		return this;
 	}
-
 }
 
 class Car1 {
@@ -38,7 +37,7 @@ class Car1 {
 	}
 }
 
-const audiCarBuilder = new BuilderCar().setWheels(4).setEngine('V12').setAutoPilot(true);
+const audiCarBuilder = new BuilderCar().setWheels(6).setEngine('V12').setAutoPilot(true);
 const audiCar1 = new Car1(audiCarBuilder)
 audiCarBuilder.setAutoPilot(false)
 const audiCar2 = new Car1(audiCarBuilder)

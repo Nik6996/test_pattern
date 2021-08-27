@@ -53,8 +53,8 @@ class DieselCarFactory implements CarFactory {
 }
 
 let electroCarFactory = new ElectroCarFactory();
-const electroCar1 = electroCarFactory.createCar();
+const electroCar1 = electroCarFactory.createCar().engine;
 const electroCar2 = electroCarFactory.createCar();
 
-console.log(electroCar1)
+console.log(electroCar2)
 
