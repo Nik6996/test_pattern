@@ -15,6 +15,7 @@ class Connection {
 		this.id = 1;
 	}
 
+
 	getId(): number {
 		return this.id
 	}

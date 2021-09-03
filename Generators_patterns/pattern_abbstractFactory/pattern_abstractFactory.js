@@ -1,13 +1,17 @@
 var ElectroEngine = /** @class */ (function () {
     function ElectroEngine() {
-        this.name = 'electro-engine';
     }
+    ElectroEngine.prototype.name = function () {
+        return 'electro-engine';
+    };
     return ElectroEngine;
 }());
 var DieselEngine = /** @class */ (function () {
     function DieselEngine() {
-        this.name = 'diesel-engine';
     }
+    DieselEngine.prototype.name = function () {
+        return 'diesel-engine';
+    };
     return DieselEngine;
 }());
 var ElectroCar = /** @class */ (function () {
@@ -15,6 +19,12 @@ var ElectroCar = /** @class */ (function () {
         this.model = model;
         this.engine = engine;
     }
+    ElectroCar.prototype.setModel = function () {
+        return this.model;
+    };
+    ElectroCar.prototype.setEngine = function () {
+        return this.engine;
+    };
     return ElectroCar;
 }());
 var DieselCar = /** @class */ (function () {
@@ -22,6 +32,12 @@ var DieselCar = /** @class */ (function () {
         this.model = model;
         this.engine = engine;
     }
+    DieselCar.prototype.setModel = function () {
+        return this.model;
+    };
+    DieselCar.prototype.setEngine = function () {
+        return this.engine;
+    };
     return DieselCar;
 }());
 var ElectroCarFactory = /** @class */ (function () {

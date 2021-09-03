@@ -1,18 +1,22 @@
 interface Engine {
-	name: string;
+	name(): string;
 }
 
 class ElectroEngine implements Engine {
-	name: string = 'electro-engine';
+	name(): string {
+		return 'electro-engine';
+	}
 }
 
 class DieselEngine implements Engine {
-	name: string = 'diesel-engine'
+	name(): string {
+		return 'diesel-engine'
+	}
 }
 
 interface Car {
-	model: string;
-	engine: Engine;
+	setModel(): string;
+	setEngine(): Engine;
 }
 
 class ElectroCar implements Car {
@@ -20,6 +24,12 @@ class ElectroCar implements Car {
 		public model: string,
 		public engine: ElectroEngine
 	) { }
+	setModel(): string {
+		return this.model
+	}
+	setEngine(): Engine {
+		return this.engine
+	}
 }
 
 class DieselCar implements Car {
@@ -27,6 +37,12 @@ class DieselCar implements Car {
 		public model: string,
 		public engine: DieselEngine
 	) { }
+	setModel(): string {
+		return this.model
+	}
+	setEngine(): Engine {
+		return this.engine
+	}
 }
 
 interface CarFactory {    //абстрактная фабрика
@@ -51,6 +67,7 @@ class DieselCarFactory implements CarFactory {
 		return new DieselEngine();
 	}
 }
+
 
 let electroCarFactory = new ElectroCarFactory();
 const electroCar1 = electroCarFactory.createCar().engine;

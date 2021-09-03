@@ -6,6 +6,7 @@ interface TopCar {
 }
 
 
+
 class BmwCar implements TopCar {
 	constructor(
 		public model: string | number,
