@@ -13,77 +13,60 @@ var __extends = (this && this.__extends) || (function () {
         d.prototype = b === null ? Object.create(b) : (__.prototype = b.prototype, new __());
     };
 })();
-var AbstractLogin = /** @class */ (function () {
-    function AbstractLogin() {
+var Account = /** @class */ (function () {
+    function Account() {
     }
-    AbstractLogin.prototype.setNext = function (login) {
-        this.nextStep = login;
-        return login;
+    Account.prototype.setNext = function (account) {
+        this.user = account;
+        return account;
     };
-    AbstractLogin.prototype.name = function (request) {
-        if (this.nextStep) {
-            return this.nextStep.name(request);
+    Account.prototype.pay = function (amountToPay) {
+        if (this.canPay(amountToPay)) {
+            console.log("\u041E\u043F\u043B\u0430\u0447\u0435\u043D\u043E " + amountToPay + " ");
         }
-        return null;
-    };
-    return AbstractLogin;
-}());
-var User1 = /** @class */ (function (_super) {
-    __extends(User1, _super);
-    function User1() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    User1.prototype.name = function (request) {
-        if (request === 'Иван') {
-            return "\u0418\u043C\u044F " + request + " \u0432\u043E\u0437\u0440\u0430\u0441\u0442 25.";
-        }
-        return _super.prototype.name.call(this, request);
-    };
-    return User1;
-}(AbstractLogin));
-var User2 = /** @class */ (function (_super) {
-    __extends(User2, _super);
-    function User2() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    User2.prototype.name = function (request) {
-        if (request === 'Миша') {
-            return "\u0438\u043C\u044F " + request + " \u0432\u043E\u0437\u0440\u0430\u0441\u0442 33.";
-        }
-        return _super.prototype.name.call(this, request);
-    };
-    return User2;
-}(AbstractLogin));
-var User3 = /** @class */ (function (_super) {
-    __extends(User3, _super);
-    function User3() {
-        return _super !== null && _super.apply(this, arguments) || this;
-    }
-    User3.prototype.name = function (request) {
-        if (request === 'Саша') {
-            return "\u0438\u043C\u044F " + request + " \u0432\u043E\u0437\u0440\u0430\u0441\u0442 33.";
-        }
-        return _super.prototype.name.call(this, request);
-    };
-    return User3;
-}(AbstractLogin));
-function user(userName) {
-    var users = ['Миша', 'Сергей', 'Иван', 'Саша'];
-    for (var _i = 0, users_1 = users; _i < users_1.length; _i++) {
-        var user_1 = users_1[_i];
-        console.log("\u0422\u0432\u043E\u0435 \u0438\u043C\u044F " + user_1 + "?");
-        var result = userName.name(user_1);
-        if (result) {
-            console.log("" + result);
+        else if (this.user) {
+            console.log("\u041D\u0435 \u043E\u043F\u043B\u0430\u0447\u0435\u043D\u043E");
+            this.user.pay(amountToPay);
         }
         else {
-            console.log(user_1 + " \u043D\u0435 \u043D\u0430\u0439\u0434\u0435\u043D");
+            console.log('Недостаточно средств');
         }
+    };
+    Account.prototype.canPay = function (amount) {
+        return this.balance >= amount;
+    };
+    return Account;
+}());
+var Bank = /** @class */ (function (_super) {
+    __extends(Bank, _super);
+    function Bank(balance) {
+        var _this = _super.call(this) || this;
+        _this.balance = balance;
+        return _this;
     }
-}
-var user1 = new User1();
-var user2 = new User2();
-var user3 = new User3();
-user1.setNext(user2).setNext(user3);
-user(user1);
+    return Bank;
+}(Account));
+var Paypal = /** @class */ (function (_super) {
+    __extends(Paypal, _super);
+    function Paypal(balance) {
+        var _this = _super.call(this) || this;
+        _this.balance = balance;
+        return _this;
+    }
+    return Paypal;
+}(Account));
+var Bitcoin = /** @class */ (function (_super) {
+    __extends(Bitcoin, _super);
+    function Bitcoin(balance) {
+        var _this = _super.call(this) || this;
+        _this.balance = balance;
+        return _this;
+    }
+    return Bitcoin;
+}(Account));
+var bank = new Bank(100);
+var paypal = new Paypal(200);
+var bitcoin = new Bitcoin(400);
+bank.setNext(paypal).setNext(bitcoin);
+bank.pay(300);
 //# sourceMappingURL=Chain_of_responsibility.js.map

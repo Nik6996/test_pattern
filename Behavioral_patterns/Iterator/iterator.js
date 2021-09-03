@@ -12,4 +12,5 @@ var Iterator = /** @class */ (function () {
     return Iterator;
 }());
 var collection = new Iterator([1, 2, 3, 4, 5]);
+console.log(collection.elements);
 //# sourceMappingURL=iterator.js.map
