@@ -19,14 +19,14 @@ var WindowControl = /** @class */ (function () {
     };
     return WindowControl;
 }());
-var OnStartCommand = /** @class */ (function () {
-    function OnStartCommand(button) {
+var OnCommand = /** @class */ (function () {
+    function OnCommand(button) {
         this.button = button;
     }
-    OnStartCommand.prototype.execute = function () {
+    OnCommand.prototype.execute = function () {
         return this.button.open();
     };
-    return OnStartCommand;
+    return OnCommand;
 }());
 var OffCommand = /** @class */ (function () {
     function OffCommand(button) {
@@ -38,7 +38,7 @@ var OffCommand = /** @class */ (function () {
     return OffCommand;
 }());
 var windowControl = new WindowControl();
-var openWindow = new OnStartCommand(windowControl);
+var openWindow = new OnCommand(windowControl);
 var closetWindow = new OffCommand(windowControl);
 var buttonOpen = new Button(openWindow);
 var buttonCloset = new Button(closetWindow);

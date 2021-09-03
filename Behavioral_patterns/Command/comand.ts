@@ -4,7 +4,7 @@ interface IButton {
 	execute(): string
 }
 
-class Button implements IButton {    //класс интерфейса
+class Button implements IButton {
 	private command: IButton
 	constructor(command: IButton) {
 		this.command = command;
@@ -15,7 +15,7 @@ class Button implements IButton {    //класс интерфейса
 	}
 }
 
-class WindowControl {                         // логика запуска
+class WindowControl {                   // логика запуска
 	public state: string
 	constructor() {
 		this.state = 'окно закрыто';
@@ -29,7 +29,7 @@ class WindowControl {                         // логика запуска
 }
 
 
-class OnStartCommand implements IButton {    // команда
+class OnCommand implements IButton {    // команда
 	private button: WindowControl
 	constructor(button: WindowControl) {
 		this.button = button;
@@ -52,7 +52,7 @@ class OffCommand implements IButton {    // команда
 
 const windowControl = new WindowControl();
 
-const openWindow = new OnStartCommand(windowControl);
+const openWindow = new OnCommand(windowControl);
 const closetWindow = new OffCommand(windowControl);
 const buttonOpen = new Button(openWindow);
 const buttonCloset = new Button(closetWindow);
