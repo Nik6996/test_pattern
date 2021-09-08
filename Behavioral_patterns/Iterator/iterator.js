@@ -1,16 +1,18 @@
-var Iterator = /** @class */ (function () {
-    function Iterator(el) {
+var MyIterator = /** @class */ (function () {
+    function MyIterator(items) {
+        this.items = items;
         this.index = 0;
-        this.elements = el;
     }
-    Iterator.prototype.next = function () {
-        return this.elements[this.index++];
+    MyIterator.prototype.next = function () {
+        return this.items[this.index++];
     };
-    Iterator.prototype.hasNext = function () {
-        return this.index < this.elements;
+    MyIterator.prototype.hasNext = function () {
+        return this.index < this.items.length;
     };
-    return Iterator;
+    return MyIterator;
 }());
-var collection = new Iterator([1, 2, 3, 4, 5]);
-console.log(collection.elements);
+var collection = new MyIterator(['a', 'b', 'c', 'd']);
+while (collection.hasNext()) {
+    console.log(collection.next());
+}
 //# sourceMappingURL=iterator.js.map

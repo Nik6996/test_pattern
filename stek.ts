@@ -8,7 +8,6 @@ function b() {
 }
 
 function c() {
-
 }
 
 

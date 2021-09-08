@@ -17,56 +17,57 @@ var Account = /** @class */ (function () {
     function Account() {
     }
     Account.prototype.setNext = function (account) {
-        this.user = account;
+        this.nextAccount = account;
         return account;
     };
     Account.prototype.pay = function (amountToPay) {
         if (this.canPay(amountToPay)) {
-            console.log("\u041E\u043F\u043B\u0430\u0447\u0435\u043D\u043E " + amountToPay + " ");
+            console.log('Оплата прошла успешно');
+            return true;
         }
-        else if (this.user) {
-            console.log("\u041D\u0435 \u043E\u043F\u043B\u0430\u0447\u0435\u043D\u043E");
-            this.user.pay(amountToPay);
+        if (this.nextAccount) {
+            console.log('Оплата не удалась');
+            return this.nextAccount.pay(amountToPay);
         }
-        else {
-            console.log('Недостаточно средств');
-        }
+        console.log('Недостаточно средств');
+        return false;
     };
     Account.prototype.canPay = function (amount) {
         return this.balance >= amount;
     };
     return Account;
 }());
-var Bank = /** @class */ (function (_super) {
-    __extends(Bank, _super);
-    function Bank(balance) {
+var BankAccount = /** @class */ (function (_super) {
+    __extends(BankAccount, _super);
+    function BankAccount(balance) {
         var _this = _super.call(this) || this;
         _this.balance = balance;
         return _this;
     }
-    return Bank;
+    return BankAccount;
 }(Account));
-var Paypal = /** @class */ (function (_super) {
-    __extends(Paypal, _super);
-    function Paypal(balance) {
+var PaypalAccount = /** @class */ (function (_super) {
+    __extends(PaypalAccount, _super);
+    function PaypalAccount(balance) {
         var _this = _super.call(this) || this;
         _this.balance = balance;
         return _this;
     }
-    return Paypal;
+    return PaypalAccount;
 }(Account));
-var Bitcoin = /** @class */ (function (_super) {
-    __extends(Bitcoin, _super);
-    function Bitcoin(balance) {
+var BitcoinAccount = /** @class */ (function (_super) {
+    __extends(BitcoinAccount, _super);
+    function BitcoinAccount(balance) {
         var _this = _super.call(this) || this;
         _this.balance = balance;
         return _this;
     }
-    return Bitcoin;
+    return BitcoinAccount;
 }(Account));
-var bank = new Bank(100);
-var paypal = new Paypal(200);
-var bitcoin = new Bitcoin(400);
-bank.setNext(paypal).setNext(bitcoin);
-bank.pay(300);
+var bank = new BankAccount(100);
+var paypal = new PaypalAccount(200);
+var bitcoin = new BitcoinAccount(400);
+bank.setNext(paypal);
+paypal.setNext(bitcoin);
+bank.pay(500);
 //# sourceMappingURL=Chain_of_responsibility.js.map

@@ -1,0 +1,12 @@
+interface Subject {
+	attach(observer: Observer): void
+
+	detach(observer: Observer): void
+
+	notify(): void
+}
+
+
+interface Observer {
+	update(subject: Subject): void
+}

@@ -1,19 +1,22 @@
-class Iterator {
-	private index: number
-	public elements: number
-	constructor(el: any) {
-		this.index = 0;
-		this.elements = el;
-	}
-	next() {
-		return this.elements[this.index++]
-	}
+interface Iterator {
+	next(): string
+	hasNext(): boolean
+}
 
-	hasNext() {
-		return this.index < this.elements;
+class MyIterator implements Iterator {
+	private index: number = 0;
+	constructor(public items: string[]) { }
+	public next(): string {
+		return this.items[this.index++]
+	}
+	public hasNext(): boolean {
+		return this.index < this.items.length
 	}
 }
 
-const collection = new Iterator([1, 2, 3, 4, 5])
+const collection = new MyIterator(['a', 'b', 'c', 'd'])
 
-console.log(collection.elements)
+while (collection.hasNext()) {
+	console.log(collection.next())
+}
+

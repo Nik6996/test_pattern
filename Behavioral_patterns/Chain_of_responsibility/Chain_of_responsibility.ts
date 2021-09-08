@@ -1,30 +1,41 @@
+interface IAccount {
+	setNext(account: IAccount): IAccount;
+	pay(amountToPay: number): boolean;
+	canPay(amount: number): boolean;
+	balance: number;
+}
 
-abstract class Account {
-	user: Account;
-	abstract balance: number;
 
-	public setNext(account: Account) {
-		this.user = account;
+abstract class Account implements IAccount {
+	private nextAccount: IAccount;
+	public balance: number;
+
+	public setNext(account: IAccount): IAccount {
+		this.nextAccount = account;
 		return account;
 	}
-	public pay(amountToPay: number) {
+
+	public pay(amountToPay: number): boolean {
 		if (this.canPay(amountToPay)) {
-			console.log(`Оплачено ${amountToPay} `);
+			console.log('Оплата прошла успешно')
+			return true
 		}
-		else if (this.user) {
-			console.log(`Не оплачено`);
-			this.user.pay(amountToPay);
-		} else {
-			console.log('Недостаточно средств')
+
+		if (this.nextAccount) {
+			console.log('Оплата не удалась')
+			return this.nextAccount.pay(amountToPay);
 		}
+		console.log('Недостаточно средств')
+		return false
 	}
+
 	public canPay(amount: number): boolean {
 		return this.balance >= amount;
 	}
 }
 
 
-class Bank extends Account {
+class BankAccount extends Account {
 	balance: number
 
 	constructor(balance: number) {
@@ -33,7 +44,7 @@ class Bank extends Account {
 	}
 }
 
-class Paypal extends Account {
+class PaypalAccount extends Account {
 	balance: number
 	constructor(balance: number) {
 		super()
@@ -41,7 +52,7 @@ class Paypal extends Account {
 	}
 }
 
-class Bitcoin extends Account {
+class BitcoinAccount extends Account {
 	balance: number
 	constructor(balance: number) {
 		super()
@@ -50,11 +61,13 @@ class Bitcoin extends Account {
 }
 
 
-let bank = new Bank(100)
-let paypal = new Paypal(200)
-let bitcoin = new Bitcoin(400)
+let bank = new BankAccount(100)
+let paypal = new PaypalAccount(200)
+let bitcoin = new BitcoinAccount(400)
 
 
-bank.setNext(paypal).setNext(bitcoin);
+bank.setNext(paypal)
+paypal.setNext(bitcoin)
 
-bank.pay(300)
+
+bank.pay(500)
