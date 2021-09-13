@@ -70,4 +70,4 @@ bank.setNext(paypal)
 paypal.setNext(bitcoin)
 
 
-bank.pay(500)
+bank.pay(300)

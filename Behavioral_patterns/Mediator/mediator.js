@@ -20,6 +20,10 @@ var Mediator = /** @class */ (function () {
         this.component1.setMediator(this);
         this.component2.setMediator(this);
     }
+    // constructor(private component1: Cat, private component2: Dog) {
+    // 	this.component1.setMediator(this);
+    // 	this.component2.setMediator(this);
+    // }
     Mediator.prototype.connection = function (event) {
         if (event === 'погулять') {
             console.log("\u0441\u043E\u0431\u044B\u0442\u0438\u0435 " + event + " \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E");

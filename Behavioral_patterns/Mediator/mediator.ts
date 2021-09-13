@@ -3,11 +3,20 @@ interface IMediator {
 }
 
 class Mediator implements IMediator {
-
-	constructor(private component1: Cat, private component2: Dog) {
+	private component1: Cat;
+	private component2: Dog;
+	constructor(component1: Cat, component2: Dog) {
+		this.component1 = component1;
+		this.component2 = component2;
 		this.component1.setMediator(this);
 		this.component2.setMediator(this);
 	}
+
+	// constructor(private component1: Cat, private component2: Dog) {
+	// 	this.component1.setMediator(this);
+	// 	this.component2.setMediator(this);
+	// }
+
 
 	public connection(event: string): void {
 		if (event === 'погулять') {
@@ -45,7 +54,6 @@ class Cat extends Enimal {
 		console.log('Cat выполняет покормить') // .?
 		this.mediator.connection('покормить')
 	}
-
 }
 
 class Dog extends Enimal {

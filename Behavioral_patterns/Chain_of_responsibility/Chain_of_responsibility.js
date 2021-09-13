@@ -69,5 +69,5 @@ var paypal = new PaypalAccount(200);
 var bitcoin = new BitcoinAccount(400);
 bank.setNext(paypal);
 paypal.setNext(bitcoin);
-bank.pay(500);
+bank.pay(300);
 //# sourceMappingURL=Chain_of_responsibility.js.map

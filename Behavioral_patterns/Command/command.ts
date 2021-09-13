@@ -9,14 +9,14 @@ interface ICommand {
 	execute(): void
 }
 
-class OpenCommand implements ICommand {  //команда
+class OpenCommand implements ICommand {
 	public execute(): void {
 		console.log('Открыть окно')
 
 	}
 }
 
-class ClosetCommand implements ICommand {  //команда
+class ClosetCommand implements ICommand {
 	public execute(): void {
 		console.log('Закрыть окно')
 	}
