@@ -49,5 +49,5 @@ class MaxObserver implements Observer {
 const news = new News()
 news.register(new NickObserver())
 news.register(new MaxObserver())
-news.unregister(new MaxObserver())
+
 news.setNews('какая то новость')

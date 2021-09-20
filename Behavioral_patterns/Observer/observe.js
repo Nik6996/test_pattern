@@ -38,6 +38,5 @@ var MaxObserver = /** @class */ (function () {
 var news = new News();
 news.register(new NickObserver());
 news.register(new MaxObserver());
-news.unregister(new MaxObserver());
 news.setNews('какая то новость');
 //# sourceMappingURL=observe.js.map

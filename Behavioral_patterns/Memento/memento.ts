@@ -5,8 +5,11 @@ interface Memento {
 
 
 class EditorMemento implements Memento {
-
-	constructor(private content: string, private content2: string) {
+	private content: string;
+	private content2: string;
+	constructor(content: string, content2: string) {
+		this.content = content;
+		this.content2 = content2;
 	}
 
 	public getContent(): string {

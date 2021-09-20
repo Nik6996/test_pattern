@@ -12,11 +12,6 @@ class Mediator implements IMediator {
 		this.component2.setMediator(this);
 	}
 
-	// constructor(private component1: Cat, private component2: Dog) {
-	// 	this.component1.setMediator(this);
-	// 	this.component2.setMediator(this);
-	// }
-
 
 	public connection(event: string): void {
 		if (event === 'погулять') {
@@ -25,7 +20,7 @@ class Mediator implements IMediator {
 		}
 		if (event === 'погладить') {
 			console.log(`событие ${event} выполнено`)
-			this.component1.eat()
+			this.component1.eat()                        // связь
 		}
 		if (event === 'покормить') {
 			console.log(`событие ${event} выполнено`)
@@ -48,17 +43,17 @@ class Cat extends Enimal {
 
 	public walk(): void {
 		console.log('Cat выполняет погулять')
-		this.mediator.connection('погулять')   // .?
+		this.mediator.connection('погулять')
 	}
 	public eat(): void {
-		console.log('Cat выполняет покормить') // .?
+		console.log('Cat выполняет покормить')
 		this.mediator.connection('покормить')
 	}
 }
 
 class Dog extends Enimal {
 	public pet(): void {
-		console.log('Dog выполняет погладить'); // .?
+		console.log('Dog выполняет погладить');
 		this.mediator.connection('погладить')
 	}
 

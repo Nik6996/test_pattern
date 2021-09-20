@@ -20,17 +20,13 @@ var Mediator = /** @class */ (function () {
         this.component1.setMediator(this);
         this.component2.setMediator(this);
     }
-    // constructor(private component1: Cat, private component2: Dog) {
-    // 	this.component1.setMediator(this);
-    // 	this.component2.setMediator(this);
-    // }
     Mediator.prototype.connection = function (event) {
         if (event === 'погулять') {
             console.log("\u0441\u043E\u0431\u044B\u0442\u0438\u0435 " + event + " \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E");
         }
         if (event === 'погладить') {
             console.log("\u0441\u043E\u0431\u044B\u0442\u0438\u0435 " + event + " \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E");
-            this.component1.eat();
+            this.component1.eat(); // связь
         }
         if (event === 'покормить') {
             console.log("\u0441\u043E\u0431\u044B\u0442\u0438\u0435 " + event + " \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D\u043E");
@@ -55,10 +51,10 @@ var Cat = /** @class */ (function (_super) {
     }
     Cat.prototype.walk = function () {
         console.log('Cat выполняет погулять');
-        this.mediator.connection('погулять'); // .?
+        this.mediator.connection('погулять');
     };
     Cat.prototype.eat = function () {
-        console.log('Cat выполняет покормить'); // .?
+        console.log('Cat выполняет покормить');
         this.mediator.connection('покормить');
     };
     return Cat;
@@ -69,7 +65,7 @@ var Dog = /** @class */ (function (_super) {
         return _super !== null && _super.apply(this, arguments) || this;
     }
     Dog.prototype.pet = function () {
-        console.log('Dog выполняет погладить'); // .?
+        console.log('Dog выполняет погладить');
         this.mediator.connection('погладить');
     };
     return Dog;
