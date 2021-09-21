@@ -1,52 +1,96 @@
-interface CreateCars {
-	carName(): string;
-	carPrice(): number;
+interface IFordCar {
+	getName(): string;
+	getPrice(): number;
 }
 
-class FordCar implements CreateCars {
-	public carName(): string {
+class FordCar implements IFordCar {
+	public getName(): string {
 		return 'Ford'
 	}
-	public carPrice(): number {
-		return 2000
+	public getPrice(): number {
+		return 2000;
 	}
 }
 
-class Decorator implements CreateCars {
-	protected car: CreateCars;
+// -------------------------------------------------------------
 
-	constructor(car: CreateCars) {
-		this.car = car;
+abstract class FordDecorator extends FordCar {
+	constructor(protected car: FordCar) {
+		super();
 	}
-	public carName(): string {
-		return this.car.carName()
+	public getName(): string {
+		return this.car.getName()
 	}
 
-	public carPrice(): number {
-		return this.car.carPrice();
+	public getPrice(): number {
+		return this.car.getPrice();
 	}
 }
 
-class Parktronic extends Decorator {
-	public carName(): string {
-		return `автомобиль ${super.carName()} с парктроником`
+// -------------------------------------------------------------
+
+class ParktronicDecorator extends FordDecorator {
+
+	public getName(): string {
+		return ` ${super.getName()} с парктроником`
 	}
 
-	public carPrice(): number {
-		return this.car.carPrice() + 1000
+	public getPrice(): number {
+		return this.car.getPrice() + 500
+	}
+}
+
+class AutopilotDecorator extends FordDecorator {
+
+	public getName(): string {
+		return `${super.getName()} с автопилотом`
 	}
 
+	public getPrice(): number {
+		return this.car.getPrice() + 1000
+	}
+}
+
+type ConfigFord = {
+	parktronic?: boolean;
+	autopilot?: boolean;
 }
 
 
+class FordFactory {
+	public create(config?: ConfigFord): FordCar {
+		let fordCar = new FordCar();
 
-function client(car: CreateCars) {
-	console.log(car.carName(), car.carPrice() + '$')
+		if (!config) {
+			return fordCar
+		}
+		if (config.parktronic) {
+			return new ParktronicDecorator(fordCar)
+		}
+		if (config.autopilot) {
+			return new AutopilotDecorator(fordCar)
+		}
+		return fordCar
+	}
 }
 
-const ford = new FordCar();
+const createFordCar = function (car: IFordCar) {
+	console.log(`автомобиль ${car.getName()} его стоимость ${car.getPrice()}`)
+}
 
+const fordFactory = new FordFactory()
 
-const fordParktronic = new Parktronic(ford)
-client(fordParktronic)
+createFordCar(fordFactory.create({
+	parktronic: true
+}))
+
+createFordCar(fordFactory.create({
+	autopilot: true
+}))
+
+createFordCar(fordFactory.create({
+	parktronic: true,
+	autopilot: true
+}))
+
 

@@ -16,43 +16,87 @@ var __extends = (this && this.__extends) || (function () {
 var FordCar = /** @class */ (function () {
     function FordCar() {
     }
-    FordCar.prototype.carName = function () {
+    FordCar.prototype.getName = function () {
         return 'Ford';
     };
-    FordCar.prototype.carPrice = function () {
+    FordCar.prototype.getPrice = function () {
         return 2000;
     };
     return FordCar;
 }());
-var Decorator = /** @class */ (function () {
-    function Decorator(car) {
-        this.car = car;
+// -------------------------------------------------------------
+var FordDecorator = /** @class */ (function (_super) {
+    __extends(FordDecorator, _super);
+    function FordDecorator(car) {
+        var _this = _super.call(this) || this;
+        _this.car = car;
+        return _this;
     }
-    Decorator.prototype.carName = function () {
-        return this.car.carName();
+    FordDecorator.prototype.getName = function () {
+        return this.car.getName();
     };
-    Decorator.prototype.carPrice = function () {
-        return this.car.carPrice();
+    FordDecorator.prototype.getPrice = function () {
+        return this.car.getPrice();
     };
-    return Decorator;
-}());
-var Parktronic = /** @class */ (function (_super) {
-    __extends(Parktronic, _super);
-    function Parktronic() {
+    return FordDecorator;
+}(FordCar));
+// -------------------------------------------------------------
+var ParktronicDecorator = /** @class */ (function (_super) {
+    __extends(ParktronicDecorator, _super);
+    function ParktronicDecorator() {
         return _super !== null && _super.apply(this, arguments) || this;
     }
-    Parktronic.prototype.carName = function () {
-        return "\u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C " + _super.prototype.carName.call(this) + " \u0441 \u043F\u0430\u0440\u043A\u0442\u0440\u043E\u043D\u0438\u043A\u043E\u043C";
+    ParktronicDecorator.prototype.getName = function () {
+        return " " + _super.prototype.getName.call(this) + " \u0441 \u043F\u0430\u0440\u043A\u0442\u0440\u043E\u043D\u0438\u043A\u043E\u043C";
     };
-    Parktronic.prototype.carPrice = function () {
-        return this.car.carPrice() + 1000;
+    ParktronicDecorator.prototype.getPrice = function () {
+        return this.car.getPrice() + 500;
     };
-    return Parktronic;
-}(Decorator));
-function client(car) {
-    console.log(car.carName(), car.carPrice() + '$');
-}
-var ford = new FordCar();
-var fordParktronic = new Parktronic(ford);
-client(fordParktronic);
+    return ParktronicDecorator;
+}(FordDecorator));
+var AutopilotDecorator = /** @class */ (function (_super) {
+    __extends(AutopilotDecorator, _super);
+    function AutopilotDecorator() {
+        return _super !== null && _super.apply(this, arguments) || this;
+    }
+    AutopilotDecorator.prototype.getName = function () {
+        return _super.prototype.getName.call(this) + " \u0441 \u0430\u0432\u0442\u043E\u043F\u0438\u043B\u043E\u0442\u043E\u043C";
+    };
+    AutopilotDecorator.prototype.getPrice = function () {
+        return this.car.getPrice() + 1000;
+    };
+    return AutopilotDecorator;
+}(FordDecorator));
+var FordFactory = /** @class */ (function () {
+    function FordFactory() {
+    }
+    FordFactory.prototype.create = function (config) {
+        var fordCar = new FordCar();
+        if (!config) {
+            return fordCar;
+        }
+        if (config.parktronic) {
+            return new ParktronicDecorator(fordCar);
+        }
+        if (config.autopilot) {
+            return new AutopilotDecorator(fordCar);
+        }
+        return fordCar;
+    };
+    return FordFactory;
+}());
+var createFordCar = function (car) {
+    console.log("\u0430\u0432\u0442\u043E\u043C\u043E\u0431\u0438\u043B\u044C " + car.getName() + " \u0435\u0433\u043E \u0441\u0442\u043E\u0438\u043C\u043E\u0441\u0442\u044C " + car.getPrice());
+};
+var fordFactory = new FordFactory();
+createFordCar(fordFactory.create({
+    parktronic: true
+}));
+createFordCar(fordFactory.create({
+    autopilot: true
+}));
+createFordCar(fordFactory.create({
+    parktronic: true,
+    autopilot: true
+}));
 //# sourceMappingURL=decorator.js.map
