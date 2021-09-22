@@ -1,56 +1,44 @@
-interface ILogIn {
-	loginName(): void
+interface IDoor {
+	open(): void;
+	close(): void;
 }
 
-class User1 implements ILogIn {
-	private pass: string;
-
-	public loginName(): void {
-		console.log('user1')
+class Door implements IDoor {
+	public open(): void {
+		console.log('Дверь открыта')
 	}
-
-	public setPass(pass: string): void {
-		this.pass = pass
-	}
-	public getPass(): string {
-		return this.pass
+	public close(): void {
+		console.log('Дверь закрыта')
 	}
 }
 
-class Proxy implements ILogIn {
-	private user1: User1;
-	constructor(user: User1) {
-		this.user1 = user;
+class SecurityDoor {
+	constructor(protected door: IDoor) { }
+
+	public open(password: string): void {
+		if (this.authenticate(password) === true) {
+			this.door.open()
+		} else {
+			console.log('Неверный пароль, дверь не открыта')
+		}
 	}
 
-	public loginName(): void {
-		if (this.password() === true) {
-			this.open()
-		} else this.closet()
-	}
-
-	private password(): boolean {
-		if (this.user1.getPass() === '1111') {
+	private authenticate(password: string): boolean {
+		if (password === '1111') {
 			return true
-		} return false
+		}
+		return false
 	}
-	private open(): void {
-		console.log(`вход выполнен`)
+	public close(): void {
+		this.door.close()
 	}
-
-	private closet(): void {
-		console.log('неверный пароль')
-	}
-
-
 }
 
-const user1 = new User1()
-user1.setPass('1111')
+let door = new Door()
+let securityDoor = new SecurityDoor(door)
 
-const proxy = new Proxy(user1);
-proxy.loginName()
-
+securityDoor.open('1111')
+securityDoor.close()
 
 
 

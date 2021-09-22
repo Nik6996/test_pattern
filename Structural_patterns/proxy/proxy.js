@@ -1,44 +1,39 @@
-var User1 = /** @class */ (function () {
-    function User1() {
+var Door = /** @class */ (function () {
+    function Door() {
     }
-    User1.prototype.loginName = function () {
-        console.log('user1');
+    Door.prototype.open = function () {
+        console.log('Дверь открыта');
     };
-    User1.prototype.setPass = function (pass) {
-        this.pass = pass;
+    Door.prototype.close = function () {
+        console.log('Дверь закрыта');
     };
-    User1.prototype.getPass = function () {
-        return this.pass;
-    };
-    return User1;
+    return Door;
 }());
-var Proxy = /** @class */ (function () {
-    function Proxy(user) {
-        this.user1 = user;
+var SecurityDoor = /** @class */ (function () {
+    function SecurityDoor(door) {
+        this.door = door;
     }
-    Proxy.prototype.loginName = function () {
-        if (this.password() === true) {
-            this.open();
+    SecurityDoor.prototype.open = function (password) {
+        if (this.authenticate(password) === true) {
+            this.door.open();
         }
-        else
-            this.closet();
+        else {
+            console.log('Неверный пароль, дверь не открыта');
+        }
     };
-    Proxy.prototype.password = function () {
-        if (this.user1.getPass() === '1111') {
+    SecurityDoor.prototype.authenticate = function (password) {
+        if (password === '1111') {
             return true;
         }
         return false;
     };
-    Proxy.prototype.open = function () {
-        console.log("\u0432\u0445\u043E\u0434 \u0432\u044B\u043F\u043E\u043B\u043D\u0435\u043D");
+    SecurityDoor.prototype.close = function () {
+        this.door.close();
     };
-    Proxy.prototype.closet = function () {
-        console.log('неверный пароль');
-    };
-    return Proxy;
+    return SecurityDoor;
 }());
-var user1 = new User1();
-user1.setPass('1111');
-var proxy = new Proxy(user1);
-proxy.loginName();
+var door = new Door();
+var securityDoor = new SecurityDoor(door);
+securityDoor.open('1111');
+securityDoor.close();
 //# sourceMappingURL=proxy.js.map

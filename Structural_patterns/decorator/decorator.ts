@@ -65,10 +65,10 @@ class FordFactory {
 			return fordCar
 		}
 		if (config.parktronic) {
-			return new ParktronicDecorator(fordCar)
+			fordCar = new ParktronicDecorator(fordCar)
 		}
 		if (config.autopilot) {
-			return new AutopilotDecorator(fordCar)
+			fordCar = new AutopilotDecorator(fordCar)
 		}
 		return fordCar
 	}
