@@ -58,7 +58,7 @@ type ConfigFord = {
 
 
 class FordFactory {
-	public create(config?: ConfigFord): FordCar {
+	public create(config?: ConfigFord): IFordCar {
 		let fordCar = new FordCar();
 
 		if (!config) {

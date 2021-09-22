@@ -13,6 +13,7 @@ class MyCar implements IPrototype {
 	}
 }
 
+
 let testProto = new MyCar(1000, 'M4', true);
 let newCar1 = testProto.clone();
 
