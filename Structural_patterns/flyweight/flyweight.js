@@ -1,17 +1,31 @@
-var Flyweight = /** @class */ (function () {
-    function Flyweight(state) {
-        this.state = state;
+var Auto = /** @class */ (function () {
+    function Auto(model) {
+        this.model = model;
     }
-    Flyweight.prototype.create = function (uniqueState) {
-        var a = this.state;
-        var b = uniqueState;
-        console.log(a, b);
+    return Auto;
+}());
+var AutoFactory = /** @class */ (function () {
+    function AutoFactory() {
+        this.models = [];
+    }
+    AutoFactory.prototype.create = function (name) {
+        var model = this.models[name];
+        if (model) {
+            return model;
+        }
+        else {
+            this.models[name] = new Auto(name);
+        }
+        return this.models[name];
     };
-    return Flyweight;
+    AutoFactory.prototype.getModels = function () {
+        console.log(this.models);
+    };
+    return AutoFactory;
 }());
-var FlyweightFactory = /** @class */ (function () {
-    function FlyweightFactory(initialFlyweights) {
-    }
-    return FlyweightFactory;
-}());
+var factory = new AutoFactory();
+var audi = factory.create('audi');
+var tesla = factory.create('tesla');
+var tesla2 = factory.create('tesla');
+console.log(factory.getModels());
 //# sourceMappingURL=flyweight.js.map
