@@ -47,6 +47,8 @@ class AudiCar extends Model {
 	}
 }
 
+// ------------------------------------------
+
 const red = new RedColor()
 const black = new BlackColor()
 const redVolvo = new VolvoCar(black)

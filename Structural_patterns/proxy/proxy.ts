@@ -13,18 +13,23 @@ class Door implements IDoor {
 }
 
 class SecurityDoor {
+	private password: string
 	constructor(protected door: IDoor) { }
 
-	public open(password: string): void {
-		if (this.authenticate(password) === true) {
+	public open(): void {
+		if (this.authenticate() === true) {
 			this.door.open()
 		} else {
 			console.log('Неверный пароль, дверь не открыта')
 		}
 	}
 
-	private authenticate(password: string): boolean {
-		if (password === '1111') {
+	public setPassword(password: string): void {
+		this.password = password
+	}
+
+	private authenticate(): boolean {
+		if (this.password === '1111') {
 			return true
 		}
 		return false
@@ -37,7 +42,8 @@ class SecurityDoor {
 let door = new Door()
 let securityDoor = new SecurityDoor(door)
 
-securityDoor.open('1111')
+securityDoor.setPassword('1111')
+securityDoor.open()
 securityDoor.close()
 
 

@@ -13,16 +13,19 @@ var SecurityDoor = /** @class */ (function () {
     function SecurityDoor(door) {
         this.door = door;
     }
-    SecurityDoor.prototype.open = function (password) {
-        if (this.authenticate(password) === true) {
+    SecurityDoor.prototype.open = function () {
+        if (this.authenticate() === true) {
             this.door.open();
         }
         else {
             console.log('Неверный пароль, дверь не открыта');
         }
     };
-    SecurityDoor.prototype.authenticate = function (password) {
-        if (password === '1111') {
+    SecurityDoor.prototype.setPassword = function (password) {
+        this.password = password;
+    };
+    SecurityDoor.prototype.authenticate = function () {
+        if (this.password === '1111') {
             return true;
         }
         return false;
@@ -34,6 +37,7 @@ var SecurityDoor = /** @class */ (function () {
 }());
 var door = new Door();
 var securityDoor = new SecurityDoor(door);
-securityDoor.open('1111');
+securityDoor.setPassword('1111');
+securityDoor.open();
 securityDoor.close();
 //# sourceMappingURL=proxy.js.map

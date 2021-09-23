@@ -16,7 +16,6 @@ class WindowsMinecraft implements IWindowsApp {
 	public start(): void {
 		console.log('Сейчас играете в Windows Minecraft.');
 	}
-
 }
 
 // ----------------------------------------------

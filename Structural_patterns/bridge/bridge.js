@@ -62,6 +62,7 @@ var AudiCar = /** @class */ (function (_super) {
     };
     return AudiCar;
 }(Model));
+// ------------------------------------------
 var red = new RedColor();
 var black = new BlackColor();
 var redVolvo = new VolvoCar(black);
